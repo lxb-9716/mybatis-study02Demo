@@ -15,6 +15,7 @@ import java.util.List;
 public class AdminController {
     public static void main(String[] args) {
         try {
+            System.out.println("我当前进行的所有操作都是在分支上进行的。。。。。。。");
             //加载核心配置文件
             InputStream resourceAsStream = Resources.getResourceAsStream("myBatis.xml");
             //创建sqlSessionFactory工厂对象
