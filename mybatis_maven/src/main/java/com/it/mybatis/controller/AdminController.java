@@ -54,8 +54,9 @@ public class AdminController {
             System.out.println("================删除数据===================");
             Admin admin2 = new Admin();
             admin2.setId(10);
-            int delete = sqlSession.delete("com.it.mybatis.mapper.AdminMapper.deleteAdminById", admin2);
-            System.out.println(delete);
+            AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+            mapper.deleteAdminById(3);
+            /*   int delete = sqlSession.delete("com.it.mybatis.mapper.AdminMapper.deleteAdminById", admin2);*/
             sqlSession.commit();
             sqlSession.close();
         } catch (IOException e) {
