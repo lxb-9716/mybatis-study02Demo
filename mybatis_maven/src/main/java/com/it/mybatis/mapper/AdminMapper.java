@@ -24,4 +24,6 @@ public interface AdminMapper {
     public void insertAdmin(Admin admin);
     /*修改数据*/
     public void updateAdmin(Admin admin);
+    /*删除用户*/
+    public void deleteAdminById(int id);
 }

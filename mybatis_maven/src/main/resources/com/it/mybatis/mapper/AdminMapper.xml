@@ -23,4 +23,9 @@
     <update id="updateAdmin" parameterType="com.it.mybatis.pojo.Admin">
         update admin set username = #{username},password= #{password} where id = #{id}
     </update>
+    <delete id="deleteAdminById" parameterType="int">
+         delete from admin where id=#{id}
+     </delete>
+
+
 </mapper>
