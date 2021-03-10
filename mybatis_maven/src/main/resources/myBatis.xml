@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--resource:加载dataBase数据配置文件-->
+    <properties resource="db.properties"/>
+    <!--setting标签的使用-->
+    <!-- <settings>
+         <setting name="" value=""/>
+     </settings>-->
+    <!--别名的配置-->
+    <typeAliases>
+        <!--只针对单个类-->
+        <!--<typeAlias type="com.it.mybatis.pojo.Admin" alias="admin"/>-->
+        <!--推荐使用这种-->
+        <package name="com.it.mybatis.pojo"/>
+    </typeAliases>
+    <!--typeHandlers标签可以完成jdbc和java类型的转换-->
+    <!--    <typeHandlers>
+
+        </typeHandlers>-->
+    <!--插件标签-->
+    <!--<plugins>
+        <plugin interceptor=""></plugin>
+    </plugins>-->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql:///ssm"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
     <!--扫描mybatis的mapper映射sql文件-->
     <mappers>
-        <mapper resource="com/it/mybatis/mapper/AdminMapper.xml"/>
+        <!--一次加载单个的映射文件-->
+        <!--  <mapper resource="com/it/mybatis/mapper/AdminMapper.xml"/>-->
+        <!--  <mapper class="com.it.mybatis.mapper.AdminMapper"/>-->
+        <!--批量加载-->
+        <!--前提：mapper映射文件名和接口名必须保持一致，而且所在的包路径也要保持一致-->
+        <package name="com.it.mybatis.mapper"/>
     </mappers>
 </configuration>
