@@ -32,8 +32,8 @@ public class AdminController {
             System.out.println(admins);
             System.out.println(admins.size());
             System.out.println("======添加数据=========");
-            Admin admin2 = new Admin();
-            admin2.setId(11);
+        /*    Admin admin2 = new Admin();
+            admin2.setId(13);
             admin2.setUsername("王⑦");
             admin2.setPassword("123");
             admin2.setSubmitTime(new Date());
@@ -41,7 +41,7 @@ public class AdminController {
             System.out.println(insert);
             System.out.println(admin2.getId());
             //手动提交事务
-            sqlSession.commit();
+            sqlSession.commit();*/
             System.out.println("=========修改数据==============");
             Admin admin1 = new Admin();
             admin1.setId(9);
