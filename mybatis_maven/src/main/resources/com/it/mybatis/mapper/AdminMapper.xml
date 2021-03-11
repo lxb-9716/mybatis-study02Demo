@@ -4,9 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.it.mybatis.mapper.AdminMapper">
-    <select id="findAll" resultType="com.it.mybatis.pojo.Admin">
-        select * from admin;
+    <!--当sql查询语句返回的列字段名和pojo的属性名不一致时，可以通过使用resultMap来完成映射-->
+    <resultMap id="resultMapFindAll" type="AdimCustomer">
+        <!--column表示sql查询条件返回的字段列表名(和pojo的属性名不一致)-->
+        <!--property表示pojo实体类的属性名-->
+        <id column="id_" property="id"/>
+        <id column="username_" property="username"/>
+        <id column="password_" property="password"/>
+    </resultMap>
+    <select id="findAll" resultMap="resultMapFindAll">
+        select id id_,username username_,password password_ from admin;
     </select>
+    <!--resultType特点：当sql查询的列表字段名和pojo属性名不一致的时候无法完成映射(注：当sql查询的所有列表字段名和pojo的属性名不一致的时候，pojo对象不会创建)-->
     <select id="findById" parameterType="int" resultType="com.it.mybatis.pojo.Admin">
         select * from admin where id =#{id}
     </select>

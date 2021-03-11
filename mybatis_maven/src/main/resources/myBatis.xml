@@ -12,7 +12,7 @@
         <!--只针对单个类-->
         <!--<typeAlias type="com.it.mybatis.pojo.Admin" alias="admin"/>-->
         <!--推荐使用这种-->
-        <package name="com.it.mybatis.pojo"/>
+        <package name="com.it.mybatis.vo"/>
     </typeAliases>
     <!--typeHandlers标签可以完成jdbc和java类型的转换-->
     <!--    <typeHandlers>

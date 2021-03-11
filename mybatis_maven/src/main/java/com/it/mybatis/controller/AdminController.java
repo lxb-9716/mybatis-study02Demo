@@ -22,8 +22,11 @@ public class AdminController {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
             //获得sqlSession对象
             SqlSession sqlSession = sqlSessionFactory.openSession();
-            List<Admin> objectList = sqlSession.selectList("com.it.mybatis.mapper.AdminMapper.findAll");
-            System.out.println(objectList);
+           /* List<Admin> objectList = sqlSession.selectList("com.it.mybatis.mapper.AdminMapper.findAll");*/
+            AdminMapper mapper1 = sqlSession.getMapper(AdminMapper.class);
+            List<Admin> all = mapper1.findAll();
+            System.out.println(all);
+          /*  System.out.println(objectList);*/
             Admin admin = sqlSession.selectOne("com.it.mybatis.mapper.AdminMapper.findById", 1);
             System.out.println("=======根据id条件查询==========");
             System.out.println(admin);
