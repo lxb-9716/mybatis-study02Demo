@@ -16,8 +16,41 @@
         select id id_,username username_,password password_ from admin;
     </select>
     <!--resultType特点：当sql查询的列表字段名和pojo属性名不一致的时候无法完成映射(注：当sql查询的所有列表字段名和pojo的属性名不一致的时候，pojo对象不会创建)-->
-    <select id="findById" parameterType="int" resultType="com.it.mybatis.pojo.Admin">
-        select * from admin where id =#{id}
+    <sql id="mainSql">
+        select * from admin
+    </sql>
+    <select id="findByAuto" parameterType="adminVo" resultType="adimCustomer">
+        <include refid="mainSql"/>
+        <where>
+            <if test="adimCustomer !=null">
+                <if test="adimCustomer.id != null and adimCustomer.id !=''">
+                    id =#{adimCustomer.id}
+                </if>
+                <if test="adimCustomer.username != null and adimCustomer.username !=''">
+                    and username =#{adimCustomer.username}
+                </if>
+                <if test="ids !=null">
+                    <!--foreach标签的使用 or in等关键字的查询
+                    mybatis基础学习动态sql的拼接学习：
+                             if标签使用
+                             where标签使用
+                             sql片段标签使用
+                             foreach标签使用
+                                    collection：指定输入对象中集合属性
+                                    item：每次遍历时的变量名
+                                    open：开始遍历需要拼接的串
+                                    close：结束时遍历时需要拼接的串
+                                    separator：遍历的两个对象中拼接的串
+                    -->
+                    <!--<foreach collection="ids" item="admin_id" open=" and (" close=")" separator="or">
+                        id=#{admin_id}
+                    </foreach>-->
+                    <foreach collection="ids" item="admin_id" open=" and id in(" close=")" separator=",">
+                        #{admin_id}
+                    </foreach>
+                </if>
+            </if>
+        </where>
     </select>
     <select id="findByUserName" parameterType="String" resultType="com.it.mybatis.pojo.Admin">
         select * from admin where username like #{username};
@@ -35,6 +68,4 @@
     <delete id="deleteAdminById" parameterType="int">
          delete from admin where id=#{id}
      </delete>
-
-
 </mapper>

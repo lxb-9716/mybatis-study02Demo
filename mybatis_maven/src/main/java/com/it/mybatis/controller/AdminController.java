@@ -2,6 +2,8 @@ package com.it.mybatis.controller;
 
 import com.it.mybatis.mapper.AdminMapper;
 import com.it.mybatis.pojo.Admin;
+import com.it.mybatis.vo.AdimCustomer;
+import com.it.mybatis.vo.AdminVo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,20 +25,33 @@ public class AdminController {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
             //获得sqlSession对象
             SqlSession sqlSession = sqlSessionFactory.openSession();
-           /* List<Admin> objectList = sqlSession.selectList("com.it.mybatis.mapper.AdminMapper.findAll");*/
+            /* *//* List<Admin> objectList = sqlSession.selectList("com.it.mybatis.mapper.AdminMapper.findAll");*//*
             AdminMapper mapper1 = sqlSession.getMapper(AdminMapper.class);
             List<Admin> all = mapper1.findAll();
             System.out.println(all);
-          /*  System.out.println(objectList);*/
-            Admin admin = sqlSession.selectOne("com.it.mybatis.mapper.AdminMapper.findById", 1);
+          *//*  System.out.println(objectList);*//*
+             *//*Admin admin = sqlSession.selectOne("com.it.mybatis.mapper.AdminMapper.findById", 1);*/
+            AdminVo adminVo = new AdminVo();
+            AdimCustomer adimCustomer = new AdimCustomer();
+            adimCustomer.setId(null);
+            /*动态sql条件拼接查询*/
+            adimCustomer.setUsername(null);
+            List<Integer> ids = new ArrayList<Integer>();
+            adminVo.setAdimCustomer(adimCustomer);
+            ids.add(5);
+            ids.add(6);
+            ids.add(7);
+            adminVo.setIds(ids);
+            List<AdimCustomer> adimCustomer1 = sqlSession.getMapper(AdminMapper.class).findByAuto(adminVo);
             System.out.println("=======根据id条件查询==========");
-            System.out.println(admin);
-            List<Admin> admins = sqlSession.selectList("com.it.mybatis.mapper.AdminMapper.findByUserName", "%四%");
+            System.out.println(adimCustomer1);
+            System.out.println(adimCustomer1.size());
+         /*   List<Admin> admins = sqlSession.selectList("com.it.mybatis.mapper.AdminMapper.findByUserName", "%四%");
             System.out.println("======模糊查询=========");
             System.out.println(admins);
             System.out.println(admins.size());
             System.out.println("======添加数据=========");
-        /*    Admin admin2 = new Admin();
+        *//*    Admin admin2 = new Admin();
             admin2.setId(13);
             admin2.setUsername("王⑦");
             admin2.setPassword("123");
@@ -44,7 +60,7 @@ public class AdminController {
             System.out.println(insert);
             System.out.println(admin2.getId());
             //手动提交事务
-            sqlSession.commit();*/
+            sqlSession.commit();*//*
             System.out.println("=========修改数据==============");
             Admin admin1 = new Admin();
             admin1.setId(9);
@@ -59,8 +75,8 @@ public class AdminController {
             admin2.setId(10);
             AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
             mapper.deleteAdminById(3);
-            /*   int delete = sqlSession.delete("com.it.mybatis.mapper.AdminMapper.deleteAdminById", admin2);*/
-            sqlSession.commit();
+            *//*   int delete = sqlSession.delete("com.it.mybatis.mapper.AdminMapper.deleteAdminById", admin2);*//*
+            sqlSession.commit();*/
             sqlSession.close();
         } catch (IOException e) {
             e.printStackTrace();
