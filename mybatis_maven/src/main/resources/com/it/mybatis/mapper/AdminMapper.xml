@@ -4,7 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.it.mybatis.mapper.AdminMapper">
-    <!--当sql查询语句返回的列字段名和pojo的属性名不一致时，可以通过使用resultMap来完成映射-->
+    <!--当sql查询语句返回的列字段名和pojo的属性名不一致时，可以通过使用resultMap来完成映射
+      id属性是resultMap的唯一标识
+     -->
     <resultMap id="resultMapFindAll" type="AdimCustomer">
         <!--column表示sql查询条件返回的字段列表名(和pojo的属性名不一致)-->
         <!--property表示pojo实体类的属性名-->
@@ -42,9 +44,11 @@
                                     close：结束时遍历时需要拼接的串
                                     separator：遍历的两个对象中拼接的串
                     -->
-                    <!--<foreach collection="ids" item="admin_id" open=" and (" close=")" separator="or">
+                    <!-- select * from admin where id=1 or id=2 or id=3 -->
+                    <foreach collection="ids" item="admin_id" open=" and (" close=")" separator="or">
                         id=#{admin_id}
-                    </foreach>-->
+                    </foreach>
+                    <!-- select * from admin where id in(1,2,3) -->
                     <foreach collection="ids" item="admin_id" open=" and id in(" close=")" separator=",">
                         #{admin_id}
                     </foreach>
