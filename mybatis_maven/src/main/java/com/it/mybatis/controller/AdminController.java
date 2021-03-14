@@ -25,6 +25,9 @@ public class AdminController {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
             //获得sqlSession对象
             SqlSession sqlSession = sqlSessionFactory.openSession();
+            /**
+             * mybatis中的中一级缓存和二级缓存测试
+             */
             /* *//* List<Admin> objectList = sqlSession.selectList("com.it.mybatis.mapper.AdminMapper.findAll");*//*
             AdminMapper mapper1 = sqlSession.getMapper(AdminMapper.class);
             List<Admin> all = mapper1.findAll();

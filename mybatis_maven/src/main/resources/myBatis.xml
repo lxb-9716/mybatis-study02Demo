@@ -4,9 +4,14 @@
     <!--resource:加载dataBase数据配置文件-->
     <properties resource="db.properties"/>
     <!--setting标签的使用-->
-    <!-- <settings>
-         <setting name="" value=""/>
-     </settings>-->
+    <settings>
+        <!--开启mybatis的二级缓存 mybatis框架的二级缓存是默认开启的-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--mybatis中延迟加载的配置,默认为false-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--关闭积极加载的配置，默认为trues-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
     <!--别名的配置-->
     <typeAliases>
         <!--只针对单个类-->

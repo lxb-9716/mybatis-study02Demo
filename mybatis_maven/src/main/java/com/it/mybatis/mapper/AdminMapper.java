@@ -3,12 +3,9 @@ package com.it.mybatis.mapper;
 import com.it.mybatis.pojo.Admin;
 import com.it.mybatis.vo.AdimCustomer;
 import com.it.mybatis.vo.AdminVo;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-@Mapper
 public interface AdminMapper {
     /*
     查询所有数据
@@ -31,4 +28,7 @@ public interface AdminMapper {
 
     /*删除用户*/
     public void deleteAdminById(int id);
+
+    /*根据用户id查询用户信息*/
+    public AdimCustomer findAdminById(AdminVo adminVo);
 }
